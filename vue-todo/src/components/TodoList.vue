@@ -1,9 +1,9 @@
 <template>
 <div>
     <ul>
-        <li v-for="todoItem in todoItems" v-bind:key="todoItem" class="shadow">
+        <li v-for="(todoItem, index) in todoItems" v-bind:key="todoItem" class="shadow">
             {{ todoItem }}
-        <span class="removeBtn" v-on:click="removeTodo">
+            <span class="removeBtn" v-on:click="removeTodo(todoItem, index)">
             <i class="fas fa-trash-alt"></i>
         </span>
         </li>
@@ -19,9 +19,12 @@ export default {
             todoItems: []
         }
     },
-    method: {
-        removeTodo: function () {
-            
+    methods: {
+        removeTodo: function (todoItem, index) {
+            console.log(todoItem, index);
+            localStorage.removeItem(todoItem);
+            // 해당 item을 지우고 새로운 배열을 반환 -> 화면에서도 삭제된다.
+            this.todoItems.splice(index, 1);
         }
     },
     created: function () {
@@ -45,6 +48,7 @@ ul {
     margin-top: 0;
     text-align: left;
 }
+
 li {
     display: flex;
     min-height: 50px;
@@ -55,21 +59,24 @@ li {
     background: white;
     border-radius: 5px;
 }
+
 .checkBtn {
     line-height: 45px;
     color: #62acde;
     margin-right: 5px;
 }
+
 .checkBtnCompleted {
     color: #b3adad;
 }
+
 .textCompleted {
     text-decoration: line-through;
     color: #b3adad;
 }
+
 .removeBtn {
     margin-left: auto;
     color: #de4343
 }
-
 </style>
