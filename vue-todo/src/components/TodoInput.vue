@@ -23,7 +23,7 @@ export default {
                     completed: false,
                     item: this.newTodoItem
                 };
-                // 저장하는 로직 (JS 객체를 Srting으로 변환)
+                // [데이터 보내기] 저장하는 로직 (JS 객체를 Srting으로 변환)
                 localStorage.setItem(this.newTodoItem, JSON.stringify(obj));
                 // localStorage.setItem(this.newTodoItem, obj);
                 this.clearInput();

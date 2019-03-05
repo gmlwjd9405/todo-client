@@ -1,8 +1,12 @@
 <template>
 <div>
     <ul>
-        <li v-for="(todoItem, index) in todoItems" v-bind:key="todoItem" class="shadow">
-            {{ todoItem }}
+        <li v-for="(todoItem, index) in todoItems" v-bind:key="todoItem.item" class="shadow">
+            <i class="checkBtn fas fa-check" v-bind:class="{checkBtnCompleted: todoItem.completed}"
+                    v-on:click="toggleComplete(todoItem, index)"></i>
+            <!-- {{obj.속성값}} 을 가져온다. -->
+            <!-- todoItem.completed가 true일 때 class로 textCompleted를 넣는다.  -->
+            <span v-bind:class="{textCompleted: todoItem.completed}">{{ todoItem.item }}</span>
             <span class="removeBtn" v-on:click="removeTodo(todoItem, index)">
             <i class="fas fa-trash-alt"></i>
         </span>
@@ -25,13 +29,23 @@ export default {
             localStorage.removeItem(todoItem);
             // 해당 item을 지우고 새로운 배열을 반환 -> 화면에서도 삭제된다.
             this.todoItems.splice(index, 1);
+        },
+        toggleComplete: function (todoItem, index) {
+            console.log(todoItem);
+            todoItem.completed = !todoItem.completed;
+
+            // [localStorage 갱신] 자동으로 localStorage를 업데이트하는 API가 없음 (삭제 후 다시 저장)
+            localStorage.removeItem(todoItem.item);
+            localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
         }
     },
     created: function () {
         if (localStorage.length > 0) {
             for (var i = 0; i < localStorage.length; i++) {
                 if (localStorage.key(i) !== 'loglevel:webpack-dev-server') {
-                    this.todoItems.push(localStorage.key(i));
+                    // [데이터 가져오기] string 값을 obj로 변환해서 가져온다.
+                    this.todoItems.push(JSON.parse(localStorage.getItem(localStorage.key(i))));
+                    // this.todoItems.push(localStorage.key(i));
                 }
             }
         }
@@ -41,7 +55,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 ul {
     list-style-type: none;
     padding-left: 0px;
