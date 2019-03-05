@@ -2,7 +2,7 @@
 <div>
     <ul>
         <li v-for="(todoItem, index) in propsdata" v-bind:key="todoItem.item" class="shadow">
-            <i class="checkBtn fas fa-check" v-bind:class="{checkBtnCompleted: todoItem.completed}" 
+            <i class="checkBtn fas fa-check" v-bind:class="{checkBtnCompleted: todoItem.completed}"
                     v-on:click="toggleComplete(todoItem, index)"></i>
             <!-- {{obj.속성값}} 을 가져온다. -->
             <!-- todoItem.completed가 true일 때 class로 textCompleted를 넣는다.  -->
@@ -21,9 +21,8 @@ export default {
     methods: {
         removeTodo: function (todoItem, index) {
             console.log(todoItem, index);
-            localStorage.removeItem(todoItem);
-            // 해당 item을 지우고 새로운 배열을 반환 -> 화면에서도 삭제된다.
-            this.todoItems.splice(index, 1);
+            // removeItem 이벤트를 발생시키고, todoItem과 index 인자값을 전달한다.
+            this.$emit('removeItem', todoItem, index);
         },
         toggleComplete: function (todoItem, index) {
             console.log(todoItem);
