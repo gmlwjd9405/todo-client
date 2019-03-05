@@ -47,7 +47,9 @@ export default {
             this.todoItems.splice(index, 1);
         },
         toggleOneItem: function (todoItem, index) {
-            todoItem.completed = !todoItem.completed;
+            // todoItem.completed = !todoItem.completed;
+            this.todoItems[index].completed = !this.todoItems[index].completed;
+            
             // [localStorage 갱신] 자동으로 localStorage를 업데이트하는 API가 없음 (삭제 후 다시 저장)
             localStorage.removeItem(todoItem.item);
             localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
