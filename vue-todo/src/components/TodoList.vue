@@ -26,11 +26,7 @@ export default {
         },
         toggleComplete: function (todoItem, index) {
             console.log(todoItem);
-            todoItem.completed = !todoItem.completed;
-
-            // [localStorage 갱신] 자동으로 localStorage를 업데이트하는 API가 없음 (삭제 후 다시 저장)
-            localStorage.removeItem(todoItem.item);
-            localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
+            this.$emit('toggleItem', todoItem, index);
         }
     },
 

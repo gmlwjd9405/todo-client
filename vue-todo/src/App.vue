@@ -5,7 +5,9 @@
     <!-- v-on:하위 컴포넌트에서 발생시킨 이벤트 이름="현재 컴포넌트 메서드 명" -->
     <TodoInput v-on:addTodoItem="addOneItem"></TodoInput>
     <!-- v-bind:내려보낼 프롭스 속성 이름="현재 위치의 컴포넌트 데이터 속성" -->
-    <TodoList v-bind:propsdata="todoItems" v-on:removeItem="removeOneItem"></TodoList>
+    <TodoList v-bind:propsdata="todoItems" 
+        v-on:removeItem="removeOneItem" 
+        v-on:toggleItem="toggleOneItem"></TodoList>
     <TodoFooter></TodoFooter>
 </div>
 </template>
@@ -43,6 +45,12 @@ export default {
             localStorage.removeItem(todoItem.item); // key값에 접근해서 삭제 
             // 해당 item을 지우고 새로운 배열을 반환 -> 화면에서도 삭제된다.
             this.todoItems.splice(index, 1);
+        },
+        toggleOneItem: function (todoItem, index) {
+            todoItem.completed = !todoItem.completed;
+            // [localStorage 갱신] 자동으로 localStorage를 업데이트하는 API가 없음 (삭제 후 다시 저장)
+            localStorage.removeItem(todoItem.item);
+            localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
         },
     },
     created: function () {
