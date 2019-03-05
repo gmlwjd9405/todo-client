@@ -2,7 +2,8 @@
 <!-- HTML -->
 <div id="app">
     <TodoHeader></TodoHeader>
-    <TodoInput></TodoInput>
+    <!-- v-on:하위 컴포넌트에서 발생시킨 이벤트 이름="현재 컴포넌트 메서드 명" -->
+    <TodoInput v-on:addTodoItem="addOneItem"></TodoInput>
     <!-- v-bind:내려보낼 프롭스 속성 이름="현재 위치의 컴포넌트 데이터 속성" -->
     <TodoList v-bind:propsdata="todoItems"></TodoList>
     <TodoFooter></TodoFooter>
@@ -21,6 +22,21 @@ export default {
     data: function () {
         return {
             todoItems: []
+        }
+    },
+    methods: {
+        // 하위에서 받아온 인자값(this.newTodoItem)
+        addOneItem: function (todoItem) {
+            // 체크 유무, text에 대한 객체 
+            var obj = {
+                completed: false,
+                item: todoItem
+            };
+            // [데이터 보내기] 저장하는 로직 (JS 객체를 Srting으로 변환)
+            localStorage.setItem(todoItem, JSON.stringify(obj));
+
+            // localStorage의 값과 화면의 값을 동기화 (push: 배열요소를 추가하는 JS API)
+            this.todoItems.push(obj);
         }
     },
     created: function () {

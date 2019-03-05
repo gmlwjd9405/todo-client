@@ -18,14 +18,9 @@ export default {
     methods: {
         addTodo: function () {
             if (this.newTodoItem !== '') { // 값이 있을 때
-                // 체크 유무, text에 대한 객체 
-                var obj = {
-                    completed: false,
-                    item: this.newTodoItem
-                };
-                // [데이터 보내기] 저장하는 로직 (JS 객체를 Srting으로 변환)
-                localStorage.setItem(this.newTodoItem, JSON.stringify(obj));
-                // localStorage.setItem(this.newTodoItem, obj);
+                // this.$emit('이벤트 이름', 인자1, 인자2, ...);
+                this.$emit('addTodoItem', this.newTodoItem); // 하위에서 addTodoItem 이벤트 발생 -> App.vue의 메서드 호출 
+
                 this.clearInput();
             }
         },
