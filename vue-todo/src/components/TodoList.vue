@@ -1,8 +1,8 @@
 <template>
 <div>
     <ul>
-        <li v-for="(todoItem, index) in todoItems" v-bind:key="todoItem.item" class="shadow">
-            <i class="checkBtn fas fa-check" v-bind:class="{checkBtnCompleted: todoItem.completed}"
+        <li v-for="(todoItem, index) in propsdata" v-bind:key="todoItem.item" class="shadow">
+            <i class="checkBtn fas fa-check" v-bind:class="{checkBtnCompleted: todoItem.completed}" 
                     v-on:click="toggleComplete(todoItem, index)"></i>
             <!-- {{obj.속성값}} 을 가져온다. -->
             <!-- todoItem.completed가 true일 때 class로 textCompleted를 넣는다.  -->
@@ -17,12 +17,7 @@
 
 <script>
 export default {
-    // localStorage의 값을 담을 data
-    data: function () {
-        return {
-            todoItems: []
-        }
-    },
+    props: ['propsdata'],
     methods: {
         removeTodo: function (todoItem, index) {
             console.log(todoItem, index);
@@ -39,18 +34,6 @@ export default {
             localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
         }
     },
-    created: function () {
-        if (localStorage.length > 0) {
-            for (var i = 0; i < localStorage.length; i++) {
-                if (localStorage.key(i) !== 'loglevel:webpack-dev-server') {
-                    // [데이터 가져오기] string 값을 obj로 변환해서 가져온다.
-                    this.todoItems.push(JSON.parse(localStorage.getItem(localStorage.key(i))));
-                    // this.todoItems.push(localStorage.key(i));
-                }
-            }
-        }
-
-    }
 
 }
 </script>
