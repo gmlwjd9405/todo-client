@@ -59,6 +59,7 @@
     - 상위 Component에서 받은 데이터를 이용해 화면을 갱신한다.
   - before
   <img src="./images/component-structure-1.png" width="60%" height="60%">
+
   - after
   <img src="./images/component-structure-2.png" width="60%" height="60%">
 
@@ -250,14 +251,10 @@ console.log(i); // 6
    import util from `util.js`;
    console.log(util); // function(x) {return console.log(x);}
    ```
-- 디스트럭처링 (Destructuring)
-
-- 전개 연산자 (Spread Operator)
-
----
 
 ## Development Environment
 - [Vue.js](https://vuejs.org/)
 
 ## References
 * [장기효 (캡틴판교) - Vue.js 중급 강좌, 웹앱 제작으로 배워보는 Vue.js, ES6, Vuex](https://www.inflearn.com/course/vue-pwa-vue-js-%EC%A4%91%EA%B8%89/)
+* [WeareSoft - JavaScript 정리 참고](https://github.com/WeareSoft/tech-interview/blob/master/contents/javascript.md)
