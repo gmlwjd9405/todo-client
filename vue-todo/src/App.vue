@@ -19,14 +19,14 @@ import TodoFooter from './components/TodoFooter.vue'
 
 export default {
     // localStorage의 값을 담을 data - 대부분의 Component가 활용 
-    data: function () {
+    data() {
         return {
             todoItems: []
         }
     },
     methods: {
         // 하위에서 받아온 인자값(this.newTodoItem)
-        addOneItem: function (todoItem) {
+        addOneItem(todoItem) {
             // 체크 유무, text에 대한 객체 
             const obj = {
                 completed: false,
@@ -38,13 +38,13 @@ export default {
             // localStorage의 값과 화면의 값을 동기화 (push: 배열요소를 추가하는 JS API)
             this.todoItems.push(obj);
         },
-        removeOneItem: function (todoItem, index) {
+        removeOneItem(todoItem, index) {
             // localStorage에서도 값을 삭제 (todoItem: obj, todoItem.item: 속성(key값과 동일하게 세팅함))
             localStorage.removeItem(todoItem.item); // key값에 접근해서 삭제 
             // 해당 item을 지우고 새로운 배열을 반환 -> 화면에서도 삭제된다.
             this.todoItems.splice(index, 1);
         },
-        toggleOneItem: function (todoItem, index) {
+        toggleOneItem(todoItem, index) {
             // todoItem.completed = !todoItem.completed;
             this.todoItems[index].completed = !this.todoItems[index].completed;
 
@@ -52,12 +52,12 @@ export default {
             localStorage.removeItem(todoItem.item);
             localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
         },
-        clearAllItems: function () {
+        clearAllItems() {
             localStorage.clear();
             this.todoItems = []; // 빈 배열로 만들어서 화면을 갱신 
         }
     },
-    created: function () {
+    created() {
         if (localStorage.length > 0) {
             for (let i = 0; i < localStorage.length; i++) {
                 if (localStorage.key(i) !== 'loglevel:webpack-dev-server') {

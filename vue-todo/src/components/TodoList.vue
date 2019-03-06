@@ -19,12 +19,12 @@
 export default {
     props: ['propsdata'],
     methods: {
-        removeTodo: function (todoItem, index) {
+        removeTodo(todoItem, index) {
             console.log(todoItem, index);
             // removeItem 이벤트를 발생시키고, todoItem과 index 인자값을 전달한다.
             this.$emit('removeItem', todoItem, index);
         },
-        toggleComplete: function (todoItem, index) {
+        toggleComplete(todoItem, index) {
             console.log(todoItem);
             this.$emit('toggleItem', todoItem, index);
         }

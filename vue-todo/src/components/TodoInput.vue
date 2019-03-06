@@ -25,14 +25,14 @@
 import Modal from './common/Modal.vue'
 
 export default {
-    data: function () {
+    data() {
         return {
             newTodoItem: "",
             showModal: false
         }
     },
     methods: {
-        addTodo: function () {
+        addTodo() {
             if (this.newTodoItem !== '') { // 값이 있을 때
                 // this.$emit('이벤트 이름', 인자1, 인자2, ...);
                 this.$emit('addTodoItem', this.newTodoItem); // 하위에서 addTodoItem 이벤트 발생 -> App.vue의 메서드 호출 
@@ -42,7 +42,7 @@ export default {
                 this.showModal = !this.showModal;
             }
         },
-        clearInput: function () {
+        clearInput() {
             this.newTodoItem = '';
 
         }
