@@ -28,7 +28,7 @@ export default {
         // 하위에서 받아온 인자값(this.newTodoItem)
         addOneItem: function (todoItem) {
             // 체크 유무, text에 대한 객체 
-            var obj = {
+            const obj = {
                 completed: false,
                 item: todoItem
             };
@@ -59,7 +59,7 @@ export default {
     },
     created: function () {
         if (localStorage.length > 0) {
-            for (var i = 0; i < localStorage.length; i++) {
+            for (let i = 0; i < localStorage.length; i++) {
                 if (localStorage.key(i) !== 'loglevel:webpack-dev-server') {
                     // [데이터 가져오기] string 값을 obj로 변환해서 가져온다.
                     this.todoItems.push(JSON.parse(localStorage.getItem(localStorage.key(i))));
