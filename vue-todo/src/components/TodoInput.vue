@@ -6,12 +6,17 @@
         <i class="fas fa-plus addBtn"></i>
     </span>
 
+    <!-- slot: 특정 컴포넌트의 일부 UI를 재사용하는 기능 -->
     <Modal v-if="showModal" @close="showModal = false">
         <!--    
         you can use custom content here to overwrite
         default content
         -->
-        <h3 slot="header">custom header</h3>
+        <h3 slot="header">경고!
+            <!-- Modal이 사라지도록 -->
+            <i class="closeModalBtn fas fa-times" @click="showModal = false"></i>
+        </h3>
+        <div slot="body">무언가를 입력하세요.</div>
     </Modal>
 </div>
 </template>
@@ -33,6 +38,8 @@ export default {
                 this.$emit('addTodoItem', this.newTodoItem); // 하위에서 addTodoItem 이벤트 발생 -> App.vue의 메서드 호출 
 
                 this.clearInput();
+            } else {
+                this.showModal = !this.showModal;
             }
         },
         clearInput: function () {
@@ -76,4 +83,8 @@ input:focus {
     color: white;
     vertical-align: middle;
 }
+.closeModalBtn {
+    color: #42b983;
+}
 </style>
+

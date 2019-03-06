@@ -4,26 +4,21 @@
         <div class="modal-wrapper">
             <div class="modal-container">
 
+                <!-- Modal Header -->
+                <!-- slot을 등록한 부분은 해당 Modal을 등록한 컴포넌트에서 다시 정의할 수 있다. -->
                 <div class="modal-header">
                     <slot name="header">
                         default header
                     </slot>
                 </div>
 
+                <!-- Modal Body -->
                 <div class="modal-body">
                     <slot name="body">
                         default body
                     </slot>
                 </div>
-
-                <div class="modal-footer">
-                    <slot name="footer">
-                        default footer
-                        <button class="modal-default-button" @click="$emit('close')">
-                OK
-              </button>
-                    </slot>
-                </div>
+                
             </div>
         </div>
     </div>
