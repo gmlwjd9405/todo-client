@@ -43,9 +43,24 @@
         - **v-bind:"지정한 속성"="{설정할 값: 설정 조건}**
             - `<li v-for="tab in tabs" v-bind:class="{active: tab === selectedTab"> {{tab}} </li>`
 - props
-    - 
-- Presentation Component와 Presentational Component의 분리 
-    - 
+    - Vue.js에서 부모-자식 Component 관계에서
+        - props는 아래로!
+        - events 위로!
+        - 즉, 부모는 props를 통해 자식에게 데이터를 전달하고 자식은 events를 통해 부모에게 메시지를 보낸다. 
+    - 모든 Component instance에는 자체 격리된 범위가 있다. 
+        - 즉, 하위 컴포넌트의 템플릿에서 상위 데이터를 직접 참조할 수 없다.
+        - 데이터는 props 옵션을 사용하여 하위 컴포넌트로 전달할 수 있다.
+- Container Component와 Presentational Component의 분리 
+  - App.vue(Container Component)
+    - 다른 Component가 공통적으로 사용하는 데이터를 가지고 조작하는 역할을 담당한다.
+  - 다른 Component(Presentational Component)
+    - 해당 template에서 이벤트가 발생하면 App.vue에 알린다.
+    - 그에 대한 결과 데이터를 props를 이용해 받는다.
+    - 상위 Component에서 받은 데이터를 이용해 화면을 갱신한다.
+  - before
+  <img src="./images/component-structure-1.png" width="60%" height="60%">
+  - after
+  <img src="./images/component-structure-2.png" width="60%" height="60%">
 
 
 ### ES5의 기본 개념 및 특징
@@ -152,7 +167,7 @@ console.log(i); // 6
          }
      }
      ```
-- 화살표 함수 (Allow Function, Fat Allow)
+- 화살표 함수 (Arrow Function, Fat Arrow)
   - 함수를 정의할 때 `function`이라는 키워드를 사용하지 않고 `=>`로 대체
   - 흔히 사용하는 **콜백 함수**의 문법을 간결화
    ```js
@@ -234,8 +249,6 @@ console.log(i); // 6
    // main.js
    import util from `util.js`;
    console.log(util); // function(x) {return console.log(x);}
-
-
    ```
 - 디스트럭처링 (Destructuring)
 
