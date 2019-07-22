@@ -122,7 +122,7 @@ console.log(i); // 6
  ```
 
 ### ES6
-- [Bable](https://babeljs.io/)
+- [Babel](https://babeljs.io/)
     - 구 버전 브라우저 중에서는 ES6의 기능을 지원하지 않는 브라우저사 있으므로 **transpiling**이 필요
     - ES6의 문법을 각 브라우저의 호환 가능한 ES5로 변환하는 컴파일러
     - Babel 온라인 에디터: [https://babeljs.io/repl/](https://babeljs.io/repl/)
